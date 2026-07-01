@@ -1,0 +1,52 @@
+apply plugin: 'com.android.library'
+apply from: "${projectDir}/../config/base_build.gradle"
+
+android {
+    namespace 'com.alibaba.wolverine'
+    compileSdkVersion 33
+    buildToolsVersion _buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion _minSdkVersion
+
+        consumerProguardFiles "consumer-rules.pro"
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+            }
+        }
+        ndk {
+            abiFilters("arm64-v8a", "armeabi-v7a")
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+            version "${cmake_version}"
+        }
+    }
+
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging true
+        }
+    }
+}
+
+dependencies {
+
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    compileOnly("com.taobao.android:tlog_adapter:3.2.2.8")
+    compileOnly("com.taobao.android:ut-analytics:6.5.12.4")
+    compileOnly("com.alibaba.wireless:divine_util:4.0.8.194")
+    compileOnly("com.alibaba.marco:marco_phoenix:1.6.0-seller-SNAPSHOT")
+
+
+}

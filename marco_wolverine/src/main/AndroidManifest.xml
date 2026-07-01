@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <instrumentation
+        android:name="com.alibaba.wolverine.component.DaemonInstrumentation"
+        android:targetPackage="${PACKAGE_NAME}"
+        android:targetProcesses="${PACKAGE_NAME}" />
+
+    <application>
+        <service
+            android:name="com.alibaba.wolverine.component.DaemonService"
+            android:exported="true"
+            android:process=":channel" />
+
+        <receiver
+            android:name="com.alibaba.wolverine.component.DaemonReceiver"
+            android:exported="true" />
+
+        <service
+            android:name="com.alibaba.wolverine.component.AssistService1"
+            android:exported="true"
+            android:process=":assist1" />
+        <service
+            android:name="com.alibaba.wolverine.component.AssistService2"
+            android:exported="true"
+            android:process=":assist2" />
+    </application>
+</manifest>
