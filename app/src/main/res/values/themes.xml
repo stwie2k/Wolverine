@@ -1,0 +1,13 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+<!--    <style name="Theme.Marco" parent="Theme.Marco.NoActionBar"/>-->
+
+<!--    <style name="Theme.Marco.NoActionBar">-->
+<!--        <item name="windowActionBar">false</item>-->
+<!--        <item name="windowNoTitle">true</item>-->
+<!--    </style>-->
+
+<!--    <style name="Theme.Marco.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />-->
+
+<!--    <style name="Theme.Marco.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />-->
+</resources>

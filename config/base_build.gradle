@@ -1,0 +1,38 @@
+version VERSION_NAME
+apply from: "https://gitlab.alibaba-inc.com/alibaba/buildscript/raw/master/6.7.1/Q/module-config.gradle"
+
+
+buildscript {
+    apply from: "https://gitlab.alibaba-inc.com/alibaba/buildscript/raw/master/6.7.1/Q/module-plugin-versions.gradle"
+
+    repositories {
+        mavenLocal()
+        maven {
+            url "https://mvnrepo.alibaba-inc.com/mvn/repository"
+        }
+        maven { url 'https://maven.aliyun.com/nexus/content/repositories/google' }
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+        jcenter()
+    }
+
+    dependencies {
+        classpath "com.alibaba.mtl.android:mtl-lite-plugin:${MTL_LITE_VERSION}"
+        classpath('com.android.tools.build:gradle') {
+            version {
+                strictly '4.2.2'
+            }
+        }
+    }
+
+    ext {
+        cmake_version = "3.14.5"
+    }
+    def isMTL = System.getProperty("isMTL")
+    if (isMTL == "true") {
+        // 摩天轮环境用 3.14.5
+        cmake_version = "3.14.5"
+    } else {
+        cmake_version = "3.22.1"
+    }
+    println("isMTL:${isMTL} cmake_version:${cmake_version}")
+}

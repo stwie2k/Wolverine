@@ -1,0 +1,83 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+
+    signingConfigs {
+        debug {
+            storeFile file('../config/android_sign_123456_123456_123456')
+            storePassword '123456'
+            keyAlias '123456'
+            keyPassword '123456'
+        }
+        release {
+            storeFile file('../config/android_sign_123456_123456_123456')
+            storePassword '123456'
+            keyAlias '123456'
+            keyPassword '123456'
+        }
+    }
+
+    namespace 'com.alibaba.wireless'
+    compileSdk _compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.alibaba.wireless"
+        minSdk _minSdkVersion
+        targetSdk _compileSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        manifestPlaceholders = [
+                PACKAGE_NAME: applicationId
+        ]
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.release
+        }
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "com.google.android.material:material:$material_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
+    implementation "androidx.annotation:annotation:$annotation_version"
+
+    implementation project(':marco_wolverine')
+
+    implementation("com.alibaba.wireless:divine_util:4.0.8.194")
+    implementation("com.taobao.android:ut-analytics:6.5.12.4")
+    implementation('com.taobao.android:orange:1.6.5@jar')
+    implementation("com.taobao.android:utdid4all:2.3.4.5")
+    implementation('com.taobao.android:tlog_adapter:3.2.2.8')
+    implementation('com.taobao.android:taobao_tlog:3.4.7.8') {
+        exclude module: 'securityguard'
+        exclude module: 'mtopsdk_allinone'
+    }
+
+//    implementation("com.github.tiann:FreeReflection:3.2.2")
+    implementation("com.alibaba.wireless:galio:1.1.0.6")
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.14'
+    implementation "me.ele.wolverine:wolverine:1.0.2.10", {
+        force = true
+    }
+    implementation 'com.iqiyi.xcrash:xcrash-android-lib:3.0.0'
+
+}

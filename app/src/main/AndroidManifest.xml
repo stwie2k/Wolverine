@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.alibaba.wireless">
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
+    <instrumentation
+        android:name="com.alibaba.marco.impl.m.iii.m"
+        tools:replace="android:targetProcesses"
+        android:targetPackage="com.alibaba.wireless"
+        android:targetProcesses="com.alibaba.wireless" />
+
+    <instrumentation
+        android:name="com.alibaba.phoenix.daemon.PhoenixInstrumentation"
+        tools:replace="android:targetProcesses"
+        android:targetPackage="${PACKAGE_NAME}"
+        android:targetProcesses="${PACKAGE_NAME}" />
+
+    <instrumentation
+        android:name="com.alibaba.wolverine.component.DaemonInstrumentation"
+        tools:replace="android:targetProcesses"
+        android:targetPackage="${PACKAGE_NAME}"
+        android:targetProcesses="${PACKAGE_NAME}" />
+
+    <instrumentation
+        android:name="me.ele.wolverine.component.DaemonInstrumentation"
+        tools:replace="android:targetProcesses"
+        android:targetPackage="${PACKAGE_NAME}"
+        android:targetProcesses="${PACKAGE_NAME},${PACKAGE_NAME}:resident,${PACKAGE_NAME}:daemon,${PACKAGE_NAME}:assist1,${PACKAGE_NAME}:assist2" />
+
+    <application
+        android:name="com.alibaba.marco.MarcoApplication"
+        android:allowBackup="false"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/noti"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true">
+        <provider
+            android:name="com.alibaba.marco.MyContentProvider"
+            android:authorities="com.alibaba.wireless.channel"
+            android:process=":channel"
+            android:enabled="true"
+            android:exported="false"></provider>
+
+
+
+        <activity
+            android:name="com.alibaba.marco.MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>
